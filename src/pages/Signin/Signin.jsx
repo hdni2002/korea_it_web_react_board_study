@@ -4,19 +4,54 @@ import { SiNaver } from "react-icons/si";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import AuthInput from "../../components/AuthInput/AuthInput";
 import * as s from "./styles";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Signin() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const signupOnClickHandler = () => {
+    navigate("/auth/signup");
+  };
+
+  const signinOnClickHandler = () => {
+    console.log(username, password);
+    if (username.trim().length === 0 || password.trim().length === 0) {
+      alert("아이디 또는 비밀번호를 입력해주세요");
+      return;
+    } else {
+      // 로그인 Api요청 보내기
+    }
+  };
+
   return (
     <div css={s.container}>
       <h1>로그인</h1>
       <div css={s.box}>
         <div css={s.inputBox}>
-          <AuthInput type="text" placeholder="아이디" />
-          <AuthInput type="password" placeholder="비밀번호" />
+          <AuthInput
+            type="text"
+            placeholder="아이디"
+            state={username}
+            setState={setUsername}
+          />
+
+          <AuthInput
+            type="password"
+            placeholder="비밀번호"
+            state={password}
+            setState={setPassword}
+          />
         </div>
         <div css={s.signinBtnBox}>
-          <button className="signup">회원가입</button>
-          <button className="signin">로그인</button>
+          <button className="signup" onClick={signupOnClickHandler}>
+            회원가입
+          </button>
+          <button className="signin" onClick={signinOnClickHandler}>
+            로그인
+          </button>
         </div>
         <div css={s.oauthBtnBox}>
           <button className="google">
