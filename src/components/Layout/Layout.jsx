@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import Header from "../Header/header";
 import * as s from "./styles";
+import Header from "../Header/header";
 
 function Layout({ children }) {
   return (
