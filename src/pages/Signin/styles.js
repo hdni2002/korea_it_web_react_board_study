@@ -24,6 +24,7 @@ export const inputBox = css`
 export const signinBtnBox = css`
   display: flex;
   gap: 10px;
+ 
 
   & > button {
     flex: 1;
