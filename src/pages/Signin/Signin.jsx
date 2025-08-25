@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
+import * as s from "./styles";
 import { FcGoogle } from "react-icons/fc";
 import { SiNaver } from "react-icons/si";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import AuthInput from "../../components/AuthInput/AuthInput";
-import * as s from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signinRequest } from "../../apis/auth/authApis";
@@ -36,9 +36,11 @@ function Signin() {
           console.log(response.data);
           if (response.data.data) {
             localStorage.setItem("accessToken", response.data.data);
+
+            window.location.href = "/";
           }
 
-          navigate("/"); // 홈으로 이동
+          // 홈으로 이동
         } else if (response.data.status === "failed") {
           alert(response.data.message);
         }
@@ -78,18 +80,18 @@ function Signin() {
         </div>
 
         <div css={s.oauthBtnBox}>
-          <button className="google">
+          <a href="http://localhost:8080/oauth2/authorization/google">
             <FcGoogle size={20} />
             <span>구글로 로그인</span>
-          </button>
-          <button className="naver">
+          </a>
+          <a>
             <SiNaver size={16} color="#03C75A" />
             <span>네이버로 로그인</span>
-          </button>
-          <button className="kakao">
+          </a>
+          <a>
             <RiKakaoTalkFill size={20} color="#FEE500" />
             <span>카카오로 로그인</span>
-          </button>
+          </a>
         </div>
       </div>
     </div>

@@ -1,14 +1,33 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./styles";
 import Header from "../Header/header";
+import { useQuery } from "@tanstack/react-query";
+import { getPrincipalRequest } from "../../apis/auth/authApis";
 
 function Layout({ children }) {
-  return (
-    <div css={s.layout}>
-      <Header />
-      <div css={s.mainContainer}>{children}</div>
-    </div>
-  );
+  const accessToken = localStorage.getItem("accessToken");
+  const { data, isLoading } = useQuery({
+    queryKey: ["getPrincipal"],
+    queryFn: getPrincipalRequest,
+    refetch: 1,
+    enabled: !!accessToken,
+  });
+  {
+    return (
+      <div css={s.layout}>
+        {isLoading ? (
+          <>
+            <p>로딩중 ...</p>
+          </>
+        ) : (
+          <>
+            <Header />
+            <div css={s.mainContainer}>{children}</div>
+          </>
+        )}
+      </div>
+    );
+  }
 }
 
 export default Layout;
